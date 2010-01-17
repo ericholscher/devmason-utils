@@ -57,7 +57,7 @@ def send_results(project, result_dict,server=PB_SERVER, auth=None):
                  'AUTHORIZATION': auth}
             )
 
-def send_build_request(project, identifier=HEAD, server=PB_SERVER):
+def send_build_request(project, identifier='HEAD', server=PB_SERVER):
     post_url = "%s/builds/request" % server
     post_data = json.dumps({
             'project': project,
