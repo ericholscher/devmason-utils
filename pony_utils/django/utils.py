@@ -4,8 +4,7 @@ import socket
 
 from pony_utils.utils import create_package, send_results, get_arch, get_app_name_from_test
 
-#http://pony_server.com
-PB_SERVER = getattr(settings, 'PB_SERVER', '')
+PB_SERVER = getattr(settings, 'PB_SERVER', 'http://devmason.com/pony_server')
 PB_USER = getattr(settings, 'PB_USER', '')
 PB_PASS = getattr(settings, 'PB_PASS', '')
 if PB_USER and PB_PASS:
@@ -13,8 +12,8 @@ if PB_USER and PB_PASS:
 else:
     print "No auth provided."
     PB_AUTH = None
-STARTED = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
 
+STARTED = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
 
 def _insert_failure(failed_apps, app, failure):
     if failed_apps.has_key(app):

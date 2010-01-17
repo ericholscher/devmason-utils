@@ -7,6 +7,8 @@ import distutils.util
 import unicodedata
 import re
 
+PB_SERVER = 'http://devmason.com/pony_server'
+
 def slugify(value):
     """
     Normalizes string, converts to lowercase, removes non-alpha characters,
@@ -34,7 +36,7 @@ def get_app_name_from_test(test):
 def get_arch():
     return distutils.util.get_platform()
 
-def create_package(server, project, name=None, auth=None):
+def create_package(project, name=None, server=PB_SERVER, auth=None):
     if not name:
         name = project
     print "Sending info for %s" % name
@@ -46,7 +48,7 @@ def create_package(server, project, name=None, auth=None):
                  'AUTHORIZATION': auth}
             )
 
-def send_results(server, project, result_dict, auth=None):
+def send_results(project, result_dict,server=PB_SERVER, auth=None):
     post_url = "%s/%s/builds" % (server, slugify(unicode(project)))
     json_payload = json.dumps(result_dict)
     h = httplib2.Http()
@@ -55,7 +57,7 @@ def send_results(server, project, result_dict, auth=None):
                  'AUTHORIZATION': auth}
             )
 
-def send_build_request(server, project, identifier):
+def send_build_request(project, identifier=HEAD, server=PB_SERVER):
     post_url = "%s/builds/request" % server
     post_data = json.dumps({
             'project': project,
