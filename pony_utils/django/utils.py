@@ -1,6 +1,7 @@
 from django.conf import settings
 import datetime
 import socket
+import unittest
 
 from pony_utils.utils import create_package, send_results, get_arch, get_app_name_from_test
 
@@ -27,10 +28,20 @@ def _increment_app(all_apps, app):
     else:
         all_apps[app] = 1
 
+def get_test_cases(suite):
+    test_cases = []
+    if isinstance(suite, unittest.TestSuite):
+        for test_case_or_suite in suite._tests:
+            if isinstance(test_case_or_suite, unittest.TestSuite):
+                test_cases.extend(get_test_cases(test_case_or_suite))
+            else:
+                test_cases.append(test_case_or_suite)
+    return test_cases
+
 def report_results_for_suite(suite, result):
     failed_apps = {}
     all_apps = {}
-    for test in suite._tests:
+    for test in get_test_cases(suite):
         test_app = get_app_name_from_test(test)
         _increment_app(all_apps, test_app)
     for failure in result.failures + result.errors:
@@ -67,5 +78,5 @@ def report_results_for_suite(suite, result):
                         ]
                     }
 
-        create_package(PB_SERVER, app, auth=PB_AUTH)
-        send_results(PB_SERVER, app, build_dict, auth=PB_AUTH)
+        create_package(app, server=PB_SERVER, auth=PB_AUTH)
+        send_results(app, build_dict, server=PB_SERVER, auth=PB_AUTH)
