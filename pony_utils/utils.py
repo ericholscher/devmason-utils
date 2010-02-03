@@ -21,13 +21,13 @@ def slugify(value):
 def get_app_name_from_test(test):
     try:
         #doctest
-        app = test._dt_test.name.split('.tests.')[0]
+        app = test._dt_test.name.split('.tests')[0]
     except AttributeError:
         #unit test in tests
-        app = test.__module__.split('.tests.')[0]
+        app = test.__module__.split('.tests')[0]
         if not app:
             #Unit test in models.
-            app = test.__module__.split('.models.')[0]
+            app = test.__module__.split('.models')[0]
         if not app:
             app = test.__module__.split('.')[0]
     return app
@@ -48,7 +48,7 @@ def create_package(project, name=None, server=PB_SERVER, auth=None):
                  'AUTHORIZATION': auth}
             )
 
-def send_results(project, result_dict,server=PB_SERVER, auth=None):
+def send_results(project, result_dict, server=PB_SERVER, auth=None):
     post_url = "%s/%s/builds" % (server, slugify(unicode(project)))
     json_payload = json.dumps(result_dict)
     h = httplib2.Http()
