@@ -1,7 +1,4 @@
-try:
-    import json
-except:
-    import simplejson
+from django.utils import simplejson as json
 import httplib2
 import distutils.util
 import unicodedata
