@@ -78,5 +78,9 @@ def report_results_for_suite(suite, result):
                         ]
                     }
 
-        create_package(app, server=PB_SERVER, auth=PB_AUTH)
-        send_results(app, build_dict, server=PB_SERVER, auth=PB_AUTH)
+        try:
+            create_package(app, server=PB_SERVER, auth=PB_AUTH)
+            send_results(app, build_dict, server=PB_SERVER, auth=PB_AUTH)
+        except:
+            #Don't blow up tests if we can't report results.
+            pass
