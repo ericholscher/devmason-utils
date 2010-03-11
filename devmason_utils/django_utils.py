@@ -3,13 +3,15 @@ import datetime
 import socket
 import unittest
 
-from devmason_utils.utils import create_package, send_results, get_arch, get_app_name_from_test
+from devmason_utils.utils import (create_package, send_results, get_arch,
+                                  get_app_name_from_test, get_auth_string)
 
 PB_SERVER = getattr(settings, 'PB_SERVER', 'http://devmason.com/pony_server')
 PB_USER = getattr(settings, 'PB_USER', '')
 PB_PASS = getattr(settings, 'PB_PASS', '')
+
 if PB_USER and PB_PASS:
-    PB_AUTH = "Basic %s" % ("%s:%s" % (PB_USER, PB_PASS)).encode("base64").strip()
+    PB_AUTH = get_auth_string(PB_USER, PB_PASS)
 else:
     print "No auth provided."
     PB_AUTH = None

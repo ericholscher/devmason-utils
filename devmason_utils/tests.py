@@ -8,4 +8,4 @@ class CreatePackageTests(TestCase):
 
     def test_create_package(self):
         auth = get_auth_string('test', 'test')
-        resp = create_package('My Project2', server='http://localhost:8000/devmason', auth=auth)
+        resp = create_package('My Project', server='http://localhost:8000/devmason', auth=auth)
