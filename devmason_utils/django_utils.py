@@ -3,7 +3,7 @@ import datetime
 import socket
 import unittest
 
-from pony_utils.utils import create_package, send_results, get_arch, get_app_name_from_test
+from devmason_utils.utils import create_package, send_results, get_arch, get_app_name_from_test
 
 PB_SERVER = getattr(settings, 'PB_SERVER', 'http://devmason.com/pony_server')
 PB_USER = getattr(settings, 'PB_USER', '')

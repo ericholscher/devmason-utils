@@ -9,6 +9,9 @@ import re
 
 PB_SERVER = 'http://devmason.com/pony_server'
 
+def get_auth_string(user, passwd):
+    return "Basic %s" % ("%s:%s" % (user, passwd)).encode("base64").strip()
+
 def slugify(value):
     """
     Normalizes string, converts to lowercase, removes non-alpha characters,
@@ -47,6 +50,7 @@ def create_package(project, name=None, server=PB_SERVER, auth=None):
         headers={'content-type':'application/json',
                  'AUTHORIZATION': auth}
             )
+    return resp
 
 def send_results(project, result_dict, server=PB_SERVER, auth=None):
     post_url = "%s/%s/builds" % (server, slugify(unicode(project)))

@@ -6,7 +6,7 @@ from django.test.utils import setup_test_environment, teardown_test_environment
 from django.test.testcases import OutputChecker, DocTestRunner, TestCase
 from django.test.simple import *
 
-from pony_utils.django.utils import report_results_for_suite
+from devmason_utils.django_utils import report_results_for_suite
 
 def run_tests(test_labels, verbosity=1, interactive=True, extra_tests=[]):
     """
