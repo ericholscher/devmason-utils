@@ -60,6 +60,9 @@ def send_results(project, result_dict, server=PB_SERVER, auth=None):
         headers={'content-type':'application/json',
                  'AUTHORIZATION': auth}
             )
+    print "Results from server:"
+    print resp
+    print content
 
 def send_build_request(project, identifier='HEAD', server=PB_SERVER):
     post_url = "%s/builds/request" % server

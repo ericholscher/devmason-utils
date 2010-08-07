@@ -14,7 +14,7 @@ if PB_USER and PB_PASS:
     PB_AUTH = get_auth_string(PB_USER, PB_PASS)
 else:
     print "No auth provided."
-    PB_AUTH = None
+    PB_AUTH = ''
 
 STARTED = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
 
